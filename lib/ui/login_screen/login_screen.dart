@@ -1,7 +1,9 @@
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently/core/constatnts.dart/app_assets.dart';
 import 'package:evently/core/constatnts.dart/app_colors.dart';
 import 'package:evently/core/constatnts.dart/app_routes.dart';
 import 'package:evently/core/constatnts.dart/app_styles.dart';
+import 'package:evently/core/provider/settings_provider.dart';
 import 'package:evently/core/widgets/custom_button.dart';
 import 'package:evently/core/widgets/custom_switch.dart';
 import 'package:evently/core/widgets/custom_textFormField.dart';
@@ -9,19 +11,23 @@ import 'package:evently/core/widgets/custom_text_span.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-//csdcsdcdcs
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  int value = 0;
   @override
   Widget build(BuildContext context) {
+    var settingsProvider = Provider.of<SettingsProvider>(context);
     return Scaffold(
-      backgroundColor: AppColors.lightWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -66,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               CustomButton(
                 backgroundColor: AppColors.primaryColor,
-                text: 'Login',
+                text: AppLocalizations.of(context)!.login,
                 textColor: AppColors.white,
               ),
               SizedBox(
@@ -97,7 +103,34 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 8,
               ),
               CustomSwitch(),
-             
+              AnimatedToggleSwitch<int>.rolling(
+                current: value,
+                values: [0, 1],
+                onChanged: (i) {
+                  setState(() => value = i);
+                  i == 0
+                      ? settingsProvider.changeLanguage('en')
+                      : settingsProvider.changeLanguage('ar');
+                },
+                allowUnlistedValues: true,
+                borderWidth: 2,
+                iconOpacity: 1,
+                iconBuilder: (value, foreground) {
+                  return Container(
+                    margin: EdgeInsets.all(6),
+                    child: Image.asset(value == 0 ? AppAssets.us :AppAssets.egypt,fit: BoxFit.scaleDown, )) ;
+                       
+                },
+                style: ToggleStyle(
+                    borderColor: AppColors.primaryColor,
+                    indicatorColor: AppColors.transparent,
+                    indicatorBorder: Border.all(
+                        color: AppColors.primaryColor,
+                        width: 4,
+                        style: BorderStyle.solid),
+                    backgroundColor:
+                        AppColors.white), // optional style settings
+              )
             ]),
           ),
         ),
