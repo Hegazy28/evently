@@ -1,4 +1,15 @@
 {
-  "login": "Login"
+  "login": "Login",
+  "dont_have_account": "Don't have an account? ",
+  "create_account": "Create Account",
+  "or": "Or",
+  "login_with_google": "Login With Google",
+  "forgot_password": "Forgot Password?",
+  "email": "Email",
+  "password": "Password",
+  "re_password": "Re Password",
+  "create_account" : "Create Account",
+  "name" : "Name",
+  "already_have_account" : "Already Have Account?"
   
 }

@@ -46,7 +46,7 @@ class CustomButton extends StatelessWidget {
                   SizedBox(
                     width: 10.w,
                   ),
-                  Text(text,style: AppStyles.inter24White.copyWith(fontSize: 20.sp,color:textColor )),
+                  Text(text,style: AppStyles.inter24White.copyWith(fontSize: 16.sp,color:textColor )),
                 ],
               ): Text(text,style: AppStyles.inter24White.copyWith(fontSize: 20.sp,color:textColor )),
             );
