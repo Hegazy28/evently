@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
+    
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
@@ -37,6 +38,11 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_native_splash: ^2.4.4
   flutter_screenutil: ^5.9.3
+  provider: ^6.1.4
+  animated_toggle_switch: ^0.8.4
+  flutter_localizations:
+    sdk: flutter
+  intl: any
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +60,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true # Add this line to enable code generation for localization
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

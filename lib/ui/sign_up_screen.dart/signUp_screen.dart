@@ -1,6 +1,8 @@
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:evently/core/constatnts.dart/app_assets.dart';
 import 'package:evently/core/constatnts.dart/app_colors.dart';
 import 'package:evently/core/constatnts.dart/app_routes.dart';
+import 'package:evently/core/provider/settings_provider.dart';
 import 'package:evently/core/widgets/custom_button.dart';
 import 'package:evently/core/widgets/custom_switch.dart';
 import 'package:evently/core/widgets/custom_textFormField.dart';
@@ -8,89 +10,146 @@ import 'package:evently/core/widgets/custom_text_span.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
   @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  bool _isFlipped = false ;
+  int value = 0;
+  @override
   Widget build(BuildContext context) {
+    //var settingsProvider = Provider.of<SettingsProvider>(context);
+    
     return Scaffold(
       backgroundColor: AppColors.lightWhite,
       appBar: AppBar(
-        backgroundColor: AppColors.lightWhite,
+        forceMaterialTransparency: true,
+        backgroundColor: AppColors.transparent,
         title: const Text('Register'),
         centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const Row(),
-            buildAppLogo(),
-            SizedBox(
-              height: 24.h,
-            ),
-            CustomTextformfield(
-              text: 'Name',
-              prefixIcon: Icon(
-                CupertinoIcons.person_fill,
-                color: AppColors.grey,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Row(),
+              buildAppLogo(),
+              SizedBox(
+                height: 18.h,
               ),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            CustomTextformfield(
-              text: 'Email',
-              prefixIcon: Icon(
-                Icons.email_rounded,
-                color: AppColors.grey,
+              CustomTextformfield(
+                text: AppLocalizations.of(context)!.name,
+                prefixIcon: Icon(
+                  CupertinoIcons.person_fill,
+                  color: AppColors.grey,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            CustomTextformfield(
-              text: 'Password',
-              isPassword: true,
-              prefixIcon: Icon(
-                CupertinoIcons.lock_fill,
-                color: AppColors.grey,
+              SizedBox(
+                height: 12.h,
               ),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            CustomTextformfield(
-              text: 'Password',
-              isPassword: true,
-              prefixIcon: Icon(
-                CupertinoIcons.lock_fill,
-                color: AppColors.grey,
+              CustomTextformfield(
+                text: AppLocalizations.of(context)!.email,
+                prefixIcon: Icon(
+                  Icons.email_rounded,
+                  color: AppColors.grey,
+                ),
               ),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            CustomButton(
-                text: 'Create Account',
-                backgroundColor: AppColors.primaryColor,
-                textColor: AppColors.lightWhite),
-            SizedBox(
-              height: 8.h,
-            ),
-            CustomTextSpan(
-              preText: 'Already Have Account ? ',
-              postText: 'Login',
-              onTap: () {
-                Navigator.push(context, AppRoutes.login());
-              },
-            ),
-            CustomSwitch(),
-          ],
+              SizedBox(
+                height: 12.h,
+              ),
+              CustomTextformfield(
+                text: AppLocalizations.of(context)!.password,
+                isPassword: true,
+                prefixIcon: Icon(
+                  CupertinoIcons.lock_fill,
+                  color: AppColors.grey,
+                ),
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              CustomTextformfield(
+                text: AppLocalizations.of(context)!.re_password,
+                isPassword: true,
+                prefixIcon: Icon(
+                  CupertinoIcons.lock_fill,
+                  color: AppColors.grey,
+                ),
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
+              CustomButton(
+                  text: AppLocalizations.of(context)!.create_account,
+                  backgroundColor: AppColors.primaryColor,
+                  textColor: AppColors.lightWhite),
+              SizedBox(
+                height: 8.h,
+              ),
+              CustomTextSpan(
+                preText: AppLocalizations.of(context)!.already_have_account,
+                postText: AppLocalizations.of(context)!.login,
+                onTap: () {
+                  Navigator.push(context, AppRoutes.login());
+                },
+              ),
+             
+              buildSwitch(),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+ Widget buildSwitch (){
+     var settingsProvider = Provider.of<SettingsProvider>(context);
+    return Transform(
+                transform: Matrix4.identity()
+                  ..scale(_isFlipped ? -1.0 : 1.0, 1.0),
+                alignment: Alignment.center,
+                child: AnimatedToggleSwitch<int>.rolling(
+                  current: value,
+                  values: [0, 1],
+                  onChanged: (i) {
+                    _isFlipped = !_isFlipped;
+                    value = i;
+                    i == 0
+                        ? settingsProvider.changeLanguage('en')
+                        : settingsProvider.changeLanguage('ar');
+
+                    setState(() {});
+                  },
+                  allowUnlistedValues: true,
+                  borderWidth: 2,
+                  iconOpacity: 1,
+                  iconBuilder: (value, foreground) {
+                    return Container(
+                        margin: EdgeInsets.all(6),
+                        child: Image.asset(
+                          value == 0 ? AppAssets.us : AppAssets.egypt,
+                          fit: BoxFit.scaleDown,
+                        ));
+                  },
+                  style: ToggleStyle(
+                      borderColor: AppColors.primaryColor,
+                      indicatorColor: AppColors.transparent,
+                      indicatorBorder: Border.all(
+                          color: AppColors.primaryColor,
+                          width: 4,
+                          style: BorderStyle.solid),
+                      backgroundColor:
+                          AppColors.white), // optional style settings
+                ),
+              );
   }
 
   Widget buildAppLogo() {
