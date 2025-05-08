@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       appBar: AppBar(
         actions: [
           Padding(
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 22.h,
                   ),
                   DefaultTabController(
-                      length: Event.eventTypes.length,
+                      length: Event.eventTypes.length - 1,
                       initialIndex: 0,
                       child: TabBar(
                           labelPadding: EdgeInsets.symmetric(horizontal: 8),
@@ -93,20 +94,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           indicatorColor: AppColors.transparent,
                           isScrollable: true,
                           tabAlignment: TabAlignment.start,
-                          onTap: (value) {_current_index = value;
-                          setState(() {
-                            
-                          });
-                          } ,
-                          tabs: Event.eventTypes.sublist(1).asMap().entries.map((entry) {
+                          onTap: (value) {
+                            _current_index = value;
+                            setState(() {});
+                          },
+                          tabs: Event.eventTypes
+                              .sublist(1)
+                              .asMap()
+                              .entries
+                              .map((entry) {
                             final e = entry.value;
                             final index = entry.key;
-                            
-                             return EventTap(
+
+                            return EventTap(
                               image: e["icon"]!,
                               text: e["type"]!,
                               isSelected: (index == _current_index),
-                              
                             );
                           }).toList()))
                 ],
@@ -117,4 +120,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+ 
 }

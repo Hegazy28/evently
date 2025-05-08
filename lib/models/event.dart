@@ -1,11 +1,11 @@
 import 'package:evently/core/constatnts.dart/app_assets.dart';
 
 class Event {
-  String description;
-  String title;
-  String date;
-  String time;
-  String type;
+  late String description;
+  late String title;
+  late String date;
+  late String time;
+  late String type;
 
   Event({
     required this.type,
@@ -15,6 +15,24 @@ class Event {
     required this.time,
   });
 
+  Event.fromJson(Map<String,dynamic> json){
+    description = json["description"];
+    title = json["title"];
+    date = json["date"];
+    time = json["time"];
+    type = json["type"];
+  }
+
+  Map<String,dynamic> toJson(Event event){
+    return {
+      "description" : event.description,
+      "title" : event.title,
+      "date" : event.date,
+      "time" : event.time,
+      "type" : event.type,
+    };
+  }
+  
   static List< Map<String, String>> eventTypes = [
      {
         "type": "All",
@@ -45,7 +63,7 @@ class Event {
        {
         "type": "Holiday",
         "image": AppAssets.holidayEvent,
-        "icon": AppAssets.heartIcon,
+        "icon": AppAssets.holidayIcon,
       },
       {
         "type": "Exhibtion",

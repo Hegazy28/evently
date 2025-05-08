@@ -31,4 +31,13 @@ class AppAssets {
   static const String workEvent = 'assets/images/events/work_event.png';
   static const String meetingEvent = 'assets/images/events/meeting_event.png';
   static const String exhibtionIcon = 'assets/images/icons/gallery.png';
+  static const String homeFill = 'assets/images/icons/homeFill.png';
+  static const String locationFill = 'assets/images/icons/locationFill.svg';
+  static const String profileFill = 'assets/images/icons/profileFill.svg';
+  static const String loveFill = 'assets/images/icons/loveFill.svg';
+  static const String homeFillSvg = 'assets/images/icons/homeSvg.svg';
+  static const String location = 'assets/images/icons/location.svg';
+  static const String profile = 'assets/images/icons/profile.svg';
+  static const String home = 'assets/images/icons/home.svg';
+  static const String love = 'assets/images/icons/heart.svg';
 }
