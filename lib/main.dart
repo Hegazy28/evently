@@ -3,6 +3,7 @@ import 'package:evently/core/provider/settings_provider.dart';
 import 'package:evently/ui/home_screen/home_screen.dart';
 import 'package:evently/ui/layout/layout.dart';
 import 'package:evently/ui/login_screen/login_screen.dart';
+import 'package:evently/ui/sign_up_screen.dart/signUp_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           debugShowCheckedModeBanner: false,
-          home: Layout(),
+          home: SignupScreen(),
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: settingsProvider.currentTheme,

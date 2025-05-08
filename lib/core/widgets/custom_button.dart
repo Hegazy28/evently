@@ -10,7 +10,9 @@ class CustomButton extends StatelessWidget {
     required this.textColor,
     this.prefixIcon,
     this.elevation,
+    required this.onTap
   });
+  final Function  onTap;
   final String text ;
   final Color backgroundColor ;
   final Color textColor ;
@@ -33,7 +35,9 @@ class CustomButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16.r),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                onTap();
+              },
               child: 
                prefixIcon != null ? 
               Row(
