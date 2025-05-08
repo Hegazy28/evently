@@ -8,8 +8,14 @@ class AppStyles {
       textStyle: TextStyle(color: AppColors.black, fontSize: 16.sp));
   static final TextStyle inter24White = GoogleFonts.inter(
       textStyle: TextStyle(color: AppColors.white, fontSize: 24.sp));
+  static final TextStyle inter24WhiteBold = GoogleFonts.inter(
+      textStyle: TextStyle(color: AppColors.white, fontSize: 24.sp,fontWeight: FontWeight.bold));
+  static final TextStyle inter14White = GoogleFonts.inter(
+      textStyle: TextStyle(color: AppColors.white, fontSize: 14.sp));
   static final TextStyle inter24Primary = GoogleFonts.inter(
       textStyle: TextStyle(color: AppColors.primaryColor, fontSize: 24.sp));
+  static final TextStyle inter14PrimaryBold = GoogleFonts.inter(
+      textStyle: TextStyle(color: AppColors.primaryColor, fontSize: 14.sp,fontWeight: FontWeight.bold));
   static final TextStyle inter16Grey = GoogleFonts.inter(
       textStyle: TextStyle(color: AppColors.grey, fontSize: 16.sp));
   

@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-  
+ 
   Widget buildSwitch (){
      var settingsProvider = Provider.of<SettingsProvider>(context);
     return Transform(
