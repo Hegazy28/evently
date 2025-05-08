@@ -7,6 +7,7 @@ import 'package:evently/core/provider/settings_provider.dart';
 import 'package:evently/core/widgets/custom_button.dart';
 import 'package:evently/core/widgets/custom_textFormField.dart';
 import 'package:evently/core/widgets/custom_text_span.dart';
+import 'package:evently/firebase/firebase_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 16,
               ),
               CustomButton(
+                onTap: (){},
                 backgroundColor: AppColors.primaryColor,
                 text: AppLocalizations.of(context)!.login,
                 textColor: AppColors.white,
@@ -95,6 +97,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 8,
               ),
               CustomButton(
+                onTap: (){
+                  showLoading(context);
+                },
                 text: AppLocalizations.of(context)!.login_with_google,
                 backgroundColor: AppColors.lightWhite,
                 textColor: AppColors.primaryColor,
